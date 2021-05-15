@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
-    <title>Select Sort</title>
+    <title>Stack</title>
 </head>
 <style>
     :root {
@@ -49,12 +49,12 @@
         margin-left: calc(var(--titleMargin) + 1rem);
     }
 
-    .background-lightblue {
-        background-color: lightblue;
+    .background-yellow {
+        background-color: #F9C74F;
     }
 
-    .background-lightcoral {
-        background-color: lightcoral;
+    .background-blue {
+        background-color: #4D908E;
     }
 
     .header {
@@ -152,6 +152,7 @@
     #container {
     width: 1000px;
     height: 550px;
+    display: flex;
     }
 
     #calculator {
@@ -251,12 +252,14 @@
     }
 
 
-    /*bloco para empilhar, ir chamando com JS, mas tem q criar uma div html*/
-    .btn-block {
-    display:block;
-    width:100%;
-    margin-top:.5rem;
-}
+    .espacoEmpilhar{
+    width: 600px;
+    height: 490px;
+    background-color: #eaedef;
+    margin: 20px 0 0 50px;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
 
     
 </style>
@@ -264,7 +267,7 @@
 <body class="body" onload="">
 
     <header class="header">Demonstração e Explicação da Estrutura de Pilha</header>
-    <section class="section background-lightblue">
+    <section class="section background-yellow">
         <article class="article">
             <header>
                 <h2 class="article-title">Conceito</h2>
@@ -287,7 +290,7 @@
                 computador, sendo até mesmo utilizado na construção de sistemas operacionais.</p>
         </article>
     </section>
-    <section class="section background-lightcoral">
+    <section class="section background-blue">
         <article class="article">
             <header>
                 <h2 class="article-title">Exemplos de Uso</h2>
@@ -339,7 +342,8 @@
                           <button class="operator" id="ans" onclick="">=</button>
                     </div>
                 </div>
-
+                <div class="espacoEmpilhar">
+                </div>
             </div>
             
             
