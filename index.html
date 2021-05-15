@@ -145,6 +145,120 @@
         font-family: Arial;
 
     }
+    
+    
+    /*css da calculadora*/
+
+    #container {
+    width: 1000px;
+    height: 550px;
+    }
+
+    #calculator {
+      width: 320px;
+      height: 490px;
+      background-color: #eaedef;
+      margin: 0 0 0 calc(var(--titleMargin) + 1rem);
+      position: relative;
+      top: 20px;
+      border-radius: 7px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    #result {
+      height: 120px;
+      margin-bottom: -40px;
+    }
+
+    #input {
+      text-align: right;
+      height: 60px;
+      width: 280px;
+      margin: 10px 20px;
+      font-size: 30px;
+      background-color: #d5d8d9;
+      border: none;
+      border-radius: 10px;
+    }
+    #keyboard {
+      height: 400px;
+    }
+    .operator,
+    .number,
+    .empty {
+      width: 50px;
+      height: 50px;
+      margin: 15px;
+      float: left;
+      border-radius: 50px;
+      border-width: 0;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .number,
+    .empty {
+      background-color: #d5d8d9;
+    }
+    .number,
+    .operator {
+      cursor: pointer;
+    }
+    .operator:active,
+    .number:active {
+      font-size: 12px;
+    }
+    .operator:focus,
+    .number:focus,
+    .empty:focus {
+      outline: 0;
+    }
+
+    button:nth-child(1) {
+      font-size: 21px;
+      background-color: #F94144;
+    }
+    button:nth-child(2) {
+      font-size: 21px;
+      background-color: #F3722C;
+    }
+    button:nth-child(3) {
+      font-size: 21px;
+      background-color: #F8961E;
+    }
+    button:nth-child(4) {
+      font-size: 21px;
+      background-color: #F9844A;
+    }
+    button:nth-child(8) {
+      font-size: 21px;
+      background-color: #F9C74F;
+    }
+    button:nth-child(12) {
+      font-size: 21px;
+      background-color: #90BE6D;
+    }
+    button:nth-child(16) {
+      font-size: 21px;
+      background-color: #43AA8B;
+    }
+    button:nth-child(17) {
+      font-size: 21px;
+      background-color: #eaedef;
+    }
+    button:nth-child(20) {
+      font-size: 21px;
+      background-color: #4D908E;
+    }
+
+
+    /*bloco para empilhar, ir chamando com JS, mas tem q criar uma div html*/
+    .btn-block {
+    display:block;
+    width:100%;
+    margin-top:.5rem;
+}
+
+    
 </style>
 
 <body class="body" onload="">
@@ -196,6 +310,39 @@
                     officia
                     deserunt mollit anim id est laborum.</p>
             </article>
+            
+            <div id="container">
+                <div id="calculator">
+                    <div id="result">
+                        <input type="text" id="input" />
+                    </div>
+                    <div id="Keyboard">
+                          <button class="operator" id="clr"  onclick="">C</button>
+                          <button class="operator" id="parentesEsquerdo" onclick="">(</button>
+                          <button class="operator" id="parentesDireito" onclick="">)</button>
+                          <button class="operator" id="divide" onclick="">&#247;</button>
+                          <button class="number" id="num7" onclick="">7</button>
+                          <button class="number" id="num8" onclick="">8</button>
+                          <button class="number" id="num9" onclick="">9</button>
+                          <button class="operator" id="multiply" onclick="">&times;</button>
+                          <button class="number" id="num4" onclick="">4</button>
+                          <button class="number" id="num5" onclick="">5</button>
+                          <button class="number" id="num6" onclick="">6</button>
+                          <button class="operator" id="minus" onclick="">-</button>
+                          <button class="number" id="num1" onclick="">1</button>
+                          <button class="number" id="num2" onclick="">2</button>
+                          <button class="number" id="num3" onclick="">3</button>
+                          <button class="operator" id="plus" onclick="">+</button>
+                          <button class="empty" id="empty"></button>
+                          <button class="number" id="num0" onclick="">0</button>
+                          <button class="number" id="dot" onclick="">.</button>
+                          <button class="operator" id="ans" onclick="">=</button>
+                    </div>
+                </div>
+
+            </div>
+            
+            
             <article class="article">
                 <header>
                     <h3 class="article-subtitle">Reversão de palavra</h3>
