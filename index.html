@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
-    <title>Select Sort</title>
+    <title>Stack</title>
 </head>
 <style>
     :root {
@@ -81,17 +81,16 @@
     /*css da calculadora*/
 
     #container {
-        display: grid;
-        grid-template-columns: 35rem 40rem;
-        grid-gap: 50px;
+        display: flex;
         height: 550px;
+        margin-left: -60px;
     }
 
     #calculator {
         width: 320px;
         height: 530px;
         background-color: #eaedef;
-        margin: 0 0 0 calc(var(--titleMargin) + 1rem);
+        margin: 0 0 0 0;
         position: relative;
         top: 20px;
         border-radius: 7px;
@@ -217,12 +216,7 @@
         background-color: #4D908E;
     }
 
-    /*bloco para empilhar, ir chamando com JS, mas tem q criar uma div html*/
-    .btn-block {
-        display: block;
-        width: 100%;
-        margin-top: .5rem;
-    }
+    
 
     .mark {
         background-color: #43AA8B;
@@ -242,6 +236,7 @@
     }
 
     #demo {
+        margin-left: 50px;
         font-size: 35px;
     }
 
@@ -302,7 +297,7 @@
     <section class="section background-blue">
         <article class="article">
             <header>
-                <h2 class="article-title">Exemplos de Uso</h2>
+                <h2 class="article-title">Exemplo de Uso</h2>
             </header>
             <article class="article">
                 <header>
@@ -368,11 +363,11 @@
                             <header>Pilha dos Números</header>
                             <div class="pilha-wrapper">
                                 <div class="pilha-content" id="pilha-num">
-                                    <div>E</div>
-                                    <div>M</div>
-                                    <div>P</div>
-                                    <div>T</div>
-                                    <div>Y</div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
                                 </div>
                             </div>
                         </div>
@@ -380,31 +375,16 @@
                             <header>Pilha das Operações</header>
                             <div class="pilha-wrapper">
                                 <div class="pilha-content" id="pilha-op">
-                                    <div>E</div>
-                                    <div>M</div>
-                                    <div>P</div>
-                                    <div>T</div>
-                                    <div>Y</div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </article>
-            <article class="article">
-                <header>
-                    <h3 class="article-subtitle">Reversão de palavra</h3>
-                </header>
-                <p class="article-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor
-                    incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
             </article>
         </article>
     </section>
