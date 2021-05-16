@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
-    <title>Stack</title>
+    <title>Select Sort</title>
 </head>
 <style>
     :root {
@@ -50,11 +50,11 @@
     }
 
     .background-yellow {
-        background-color: #F9C74F;
+        background-color: lightblue;
     }
 
     .background-blue {
-        background-color: #4D908E;
+        background-color: lightcoral;
     }
 
     .header {
@@ -62,74 +62,6 @@
         font-size: 3rem;
         font-family: Arial;
         padding: 5%;
-    }
-
-    .grid-container {
-        display: flex;
-        padding-left: 20%;
-        padding-right: 20%;
-    }
-
-    .grid-container-index {
-        display: flex;
-        padding-left: 20%;
-        padding-right: 20%;
-    }
-
-    .col {
-        flex: 1;
-        padding: 1px;
-        text-align: center;
-    }
-
-    .cel {
-        background-color: black;
-        padding-left: 1px;
-        padding-right: 1px;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        text-align: center;
-    }
-
-    .cel-color-white {
-        background-color: white;
-    }
-
-    .tooltip {
-        position: relative;
-        /*border-bottom: 1px dotted black;*/
-    }
-
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-        position: absolute;
-        /*z-index: 1;*/
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
-        opacity: 0;
-    }
-
-    .tooltip .tooltiptext::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #555 transparent transparent transparent;
-    }
-
-    .tooltip:hover .tooltiptext {
-        visibility: visible;
-        opacity: 1;
     }
 
     .container {
@@ -145,123 +77,200 @@
         font-family: Arial;
 
     }
-    
-    
+
     /*css da calculadora*/
 
     #container {
-    width: 1000px;
-    height: 550px;
-    display: flex;
+        display: grid;
+        grid-template-columns: 35rem 40rem;
+        grid-gap: 50px;
+        height: 550px;
     }
 
     #calculator {
-      width: 320px;
-      height: 490px;
-      background-color: #eaedef;
-      margin: 0 0 0 calc(var(--titleMargin) + 1rem);
-      position: relative;
-      top: 20px;
-      border-radius: 7px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 320px;
+        height: 530px;
+        background-color: #eaedef;
+        margin: 0 0 0 calc(var(--titleMargin) + 1rem);
+        position: relative;
+        top: 20px;
+        border-radius: 7px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     #result {
-      height: 120px;
-      margin-bottom: -40px;
+        height: 120px;
+        margin-bottom: -40px;
     }
 
     #input {
-      text-align: right;
-      height: 60px;
-      width: 280px;
-      margin: 10px 20px;
-      font-size: 30px;
-      background-color: #d5d8d9;
-      border: none;
-      border-radius: 10px;
+        text-align: right;
+        height: 60px;
+        width: 280px;
+        margin: 10px 20px;
+        font-size: 30px;
+        background-color: #d5d8d9;
+        border: none;
+        border-radius: 10px;
     }
+
     #keyboard {
-      height: 400px;
+        height: 400px;
     }
+
+    #slider {
+        height: 50px;
+    }
+
+    #label-calculator {
+        position: absolute;
+        top: 2%;
+        left: 21%;
+    }
+
+    #label-calculator-speed {
+        position: relative;
+    }
+
+    #range-calculator {
+        position: absolute;
+        top: 6%;
+        left: 30%;
+    }
+
     .operator,
     .number,
     .empty {
-      width: 50px;
-      height: 50px;
-      margin: 15px;
-      float: left;
-      border-radius: 50px;
-      border-width: 0;
-      font-size: 15px;
-      font-weight: bold;
+        width: 50px;
+        height: 50px;
+        margin: 15px;
+        float: left;
+        border-radius: 50px;
+        border-width: 0;
+        font-size: 15px;
+        font-weight: bold;
     }
+
     .number,
     .empty {
-      background-color: #d5d8d9;
+        background-color: #d5d8d9;
     }
+
     .number,
     .operator {
-      cursor: pointer;
+        cursor: pointer;
     }
+
     .operator:active,
     .number:active {
-      font-size: 12px;
+        font-size: 12px;
     }
+
     .operator:focus,
     .number:focus,
     .empty:focus {
-      outline: 0;
+        outline: 0;
     }
 
     button:nth-child(1) {
-      font-size: 21px;
-      background-color: #F94144;
+        font-size: 21px;
+        background-color: #F94144;
     }
+
     button:nth-child(2) {
-      font-size: 21px;
-      background-color: #F3722C;
+        font-size: 21px;
+        background-color: #F3722C;
     }
+
     button:nth-child(3) {
-      font-size: 21px;
-      background-color: #F8961E;
+        font-size: 21px;
+        background-color: #F8961E;
     }
+
     button:nth-child(4) {
-      font-size: 21px;
-      background-color: #F9844A;
+        font-size: 21px;
+        background-color: #F9844A;
     }
+
     button:nth-child(8) {
-      font-size: 21px;
-      background-color: #F9C74F;
+        font-size: 21px;
+        background-color: #F9C74F;
     }
+
     button:nth-child(12) {
-      font-size: 21px;
-      background-color: #90BE6D;
+        font-size: 21px;
+        background-color: #90BE6D;
     }
+
     button:nth-child(16) {
-      font-size: 21px;
-      background-color: #43AA8B;
+        font-size: 21px;
+        background-color: #43AA8B;
     }
+
     button:nth-child(17) {
-      font-size: 21px;
-      background-color: #eaedef;
+        font-size: 21px;
+        background-color: #eaedef;
     }
+
     button:nth-child(20) {
-      font-size: 21px;
-      background-color: #4D908E;
+        font-size: 21px;
+        background-color: #4D908E;
     }
 
-
-    .espacoEmpilhar{
-    width: 600px;
-    height: 490px;
-    background-color: #eaedef;
-    margin: 20px 0 0 50px;
-    border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*bloco para empilhar, ir chamando com JS, mas tem q criar uma div html*/
+    .btn-block {
+        display: block;
+        width: 100%;
+        margin-top: .5rem;
     }
 
-    
+    .mark {
+        background-color: #43AA8B;
+    }
+
+    .mark-operation {
+        background-color: #f6eb4c;
+    }
+
+    #calculator-animation {
+        top: 20px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 50px;
+
+    }
+
+    #demo {
+        font-size: 35px;
+    }
+
+    .pilha {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .pilha-content {
+        display: table-cell;
+        vertical-align: bottom;
+        width: 100%;
+        min-height: 210px;
+        height: 210px;
+        max-height: 210px;
+        background-color: #eaedef;
+        border-radius: 7px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .pilha-content div {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .pilha-wrapper {
+        width: 100%;
+        display: table;
+    }
 </style>
 
 <body class="body" onload="">
@@ -312,41 +321,76 @@
                     fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                     officia
                     deserunt mollit anim id est laborum.</p>
+                <div id="container">
+                    <div id="calculator">
+                        <div id="slider">
+                            <div>
+                                <label id="label-calculator">Velocidade dos passos: </labe>
+                                    <labe id="label-calculator-speed">0.4 s</labe>
+                            </div>
+                            <div>
+                                <input id="range-calculator" min="0" max="1000" value="400" step="10"
+                                    onmousemove="rangeCalculator(this.value)" onchange="rangeCalculator(this.value)"
+                                    type="range" id="speed" />
+                            </div>
+                        </div>
+                        <div id="result">
+                            <input type="text" id="input" value="" />
+                        </div>
+                        <div id="Keyboard">
+                            <button class="operator" id="del" onmousedown="delInput()">D</button>
+                            <button class="operator" id="parentesEsquerdo" onclick="addInput('(')">(</button>
+                            <button class="operator" id="parentesDireito" onclick="addInput(')')">)</button>
+                            <button class="operator" id="divide" onclick="addInput('/')">&#247;</button>
+                            <button class="number" id="num7" onclick="addInput('7')">7</button>
+                            <button class="number" id="num8" onclick="addInput('8')">8</button>
+                            <button class="number" id="num9" onclick="addInput('9')">9</button>
+                            <button class="operator" id="multiply" onclick="addInput('*')">&times;</button>
+                            <button class="number" id="num4" onclick="addInput('4')">4</button>
+                            <button class="number" id="num5" onclick="addInput('5')">5</button>
+                            <button class="number" id="num6" onclick="addInput('6')">6</button>
+                            <button class="operator" id="minus" onclick="addInput('-')">-</button>
+                            <button class="number" id="num1" onclick="addInput('1')">1</button>
+                            <button class="number" id="num2" onclick="addInput('2')">2</button>
+                            <button class="number" id="num3" onclick="addInput('3')">3</button>
+                            <button class="operator" id="plus" onclick="addInput('+')">+</button>
+                            <button class="empty" id="empty"></button>
+                            <button class="number" id="num0" onclick="addInput('0')">0</button>
+                            <button class="number" id="dot" onclick="addInput('.')">.</button>
+                            <button class="operator" id="ans" onclick="calculate()">=</button>
+                        </div>
+                    </div>
+                    <div id="calculator-animation">
+                        <div>
+                            <label id="demo"></label>
+                        </div>
+                        <div class="pilha">
+                            <header>Pilha dos Números</header>
+                            <div class="pilha-wrapper">
+                                <div class="pilha-content" id="pilha-num">
+                                    <div>E</div>
+                                    <div>M</div>
+                                    <div>P</div>
+                                    <div>T</div>
+                                    <div>Y</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pilha">
+                            <header>Pilha das Operações</header>
+                            <div class="pilha-wrapper">
+                                <div class="pilha-content" id="pilha-op">
+                                    <div>E</div>
+                                    <div>M</div>
+                                    <div>P</div>
+                                    <div>T</div>
+                                    <div>Y</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </article>
-            
-            <div id="container">
-                <div id="calculator">
-                    <div id="result">
-                        <input type="text" id="input" />
-                    </div>
-                    <div id="Keyboard">
-                          <button class="operator" id="clr"  onclick="">C</button>
-                          <button class="operator" id="parentesEsquerdo" onclick="">(</button>
-                          <button class="operator" id="parentesDireito" onclick="">)</button>
-                          <button class="operator" id="divide" onclick="">&#247;</button>
-                          <button class="number" id="num7" onclick="">7</button>
-                          <button class="number" id="num8" onclick="">8</button>
-                          <button class="number" id="num9" onclick="">9</button>
-                          <button class="operator" id="multiply" onclick="">&times;</button>
-                          <button class="number" id="num4" onclick="">4</button>
-                          <button class="number" id="num5" onclick="">5</button>
-                          <button class="number" id="num6" onclick="">6</button>
-                          <button class="operator" id="minus" onclick="">-</button>
-                          <button class="number" id="num1" onclick="">1</button>
-                          <button class="number" id="num2" onclick="">2</button>
-                          <button class="number" id="num3" onclick="">3</button>
-                          <button class="operator" id="plus" onclick="">+</button>
-                          <button class="empty" id="empty"></button>
-                          <button class="number" id="num0" onclick="">0</button>
-                          <button class="number" id="dot" onclick="">.</button>
-                          <button class="operator" id="ans" onclick="">=</button>
-                    </div>
-                </div>
-                <div class="espacoEmpilhar">
-                </div>
-            </div>
-            
-            
             <article class="article">
                 <header>
                     <h3 class="article-subtitle">Reversão de palavra</h3>
@@ -368,24 +412,41 @@
 </body>
 
 <script type="text/javascript">
+    //Usa o conceito de "promessa", uma Promise é tipo uma chamada de uma API, você envia uma 
+    //informação e seu código é forçado a esperar até essa informação retornar para continuar.
+    //O setTimeout é uma função que O QUE ESTÁ DENTRO DELA, é executado depois de um tempo.
+    const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+    var waitTime = 400;
     class Stack {
-        constructor(name) {
-            this.name = name;
+        constructor(stackElement) {
+            this.stackElement = stackElement;
+            clearChilds(this.stackElement);
             this.stack = [];
         }
-        length() {
-            return this.stack.length;
+        get length() {
+            let length = this.stack.length;
+            return length;
         }
-        push(value) {
+        async push(value) {
+            await sleep(waitTime);
+            let letter = document.createElement("div");
+            letter.textContent = value;
+            this.stackElement.prepend(letter);
             console.log("Pushed value " + value);
             this.stack.push(value);
         }
-        pop() {
+        async #pop() {
+            await sleep(waitTime);
             let value = this.stack.pop();
+            this.stackElement.removeChild(this.stackElement.firstElementChild);
             console.log("Poped value " + value);
             return value;
         }
-        peek() {
+        get pop() {
+            let value = this.#pop();
+            return value;
+        }
+        get peek() {
             let top = this.stack.pop();
             this.stack.push(top);
             console.log("Top is " + top);
@@ -402,73 +463,20 @@
         static MUL = "*";
         static PAR_OPEN = "(";
         static PAR_CLOSE = ")";
-        //Passe a expressão aqui para calcular
-        evaluate(str) {
-            let numStack = new Stack("Números");
-            let opStack = new Stack("Operações");
-            let parIsOpen = 0;
-            let previousVal = "";
-
-            for (let i = 0; i < str.length; i++) {
-                let char = str.charAt(i);
-                if (this.isDigit(char)) {
-                    if (previousVal != "") {
-                        numStack.pop();
-                    }
-                    previousVal += char;
-                    numStack.push(previousVal);
-                } else if (this.isComma(char)) {
-                    previousVal += char;
-                    numStack.pop();
-                    numStack.push(previousVal);
-                } else if (this.isOperator(char)) {
-                    if (opStack.length() != 0) {
-                        if (this.getPrecedence(char) < this.getPrecedence(opStack.peek())) {
-                            if (parIsOpen > 0) {
-                                opStack.push(char);
-                                previousVal = "";
-                            } else {
-                                let res = this.operate(numStack.pop(), numStack.pop(), opStack.pop());
-                                numStack.push(res);
-                                opStack.push(char);
-                                previousVal = "";
-                            }
-                        } else {
-                            if (char == Calculator.PAR_CLOSE) {
-                                parIsOpen -= parIsOpen > 0 ? 1 : 0;
-                                let res = this.operate(numStack.pop(), numStack.pop(), opStack.pop())
-                                numStack.push(res);
-                            } else {
-                                if (char != Calculator.PAR_OPEN) {
-                                    opStack.push(char);
-                                } else {
-                                    parIsOpen += 1;
-                                }
-                                previousVal = "";
-                            }
-                        }
-                    } else {
-                        if (char != Calculator.PAR_OPEN) {
-                            opStack.push(char);
-                            previousVal = "";
-                        } else if (char == Calculator.PAR_OPEN) {
-                            parIsOpen += 1;
-                        }
-                    }
-                }
-            }
-            while (opStack.length() != 0) {
-                let res = this.operate(numStack.pop(), numStack.pop(), opStack.pop());
-                numStack.push(res);
-            }
-            console.log("Final result: " + numStack.peek());
+        constructor(demoElement, numStack, opStack) {
+            this.demoElement = demoElement;
+            this.numStack = numStack;
+            this.opStack = opStack;
         }
         //Serve para realizar o calculo de acordo com cada operador
-        #operate(val1, val2, op) {
-            let a = parseFloat(val1);
-            let b = parseFloat(val2);
+        async #operate(num, op) {
+            addStyleClass(num.stackElement.firstElementChild, "mark-operation");
+            let a = parseFloat(await num.pop);
+            addStyleClass(num.stackElement.firstElementChild, "mark-operation");
+            let b = parseFloat(await num.pop);
+            addStyleClass(op.stackElement.firstElementChild, "mark-operation");
             let res;
-            switch (op) {
+            switch (await op.pop) {
                 case Calculator.ADD:
                     res = a + b;
                     console.log(a + " + " + b + " = " + res);
@@ -520,54 +528,146 @@
                     return -1;
             }
         }
+        //Passe a expressão aqui para calcular
+        async evaluate(str) {
+            let parIsOpen = 0;
+            let previousVal = "";
+            for (let i = 0; i < str.length; i++) {
+                let char = str.charAt(i);
+                if (typeof this.demoElement !== undefined) {
+                    let id = char;
+                    let currentLetter = this.demoElement.querySelector("[id='" + char + "']");
+                    addStyleClass(currentLetter, "mark");
+                }
+                if (this.#isDigit(char)) {
+                    if (previousVal != "") {
+                        await this.numStack.pop;
+                    }
+                    previousVal += char;
+                    await this.numStack.push(previousVal);
+                } else if (this.#isComma(char)) {
+                    previousVal += char;
+                    await this.numStack.pop;
+                    await this.numStack.push(previousVal);
+                } else if (this.#isOperator(char)) {
+                    if (this.opStack.length != 0) {
+                        if (this.#getPrecedence(char) < this.#getPrecedence(await this.opStack.peek)) {
+                            if (parIsOpen > 0) {
+                                await this.opStack.push(char);
+                                previousVal = "";
+                            } else {
+                                let res = await this.#operate(this.numStack, this.opStack);
+                                await this.numStack.push(res);
+                                await this.opStack.push(char);
+                                previousVal = "";
+                            }
+                        } else {
+                            if (char == Calculator.PAR_CLOSE) {
+                                parIsOpen -= parIsOpen > 0 ? 1 : 0;
+                                let res = await this.#operate(this.numStack, this.opStack)
+                                this.numStack.push(res);
+                            } else {
+                                if (char != Calculator.PAR_OPEN) {
+                                    this.opStack.push(char);
+                                } else {
+                                    parIsOpen += 1;
+                                }
+                                previousVal = "";
+                            }
+                        }
+                    } else {
+                        if (char != Calculator.PAR_OPEN) {
+                            await this.opStack.push(char);
+                            previousVal = "";
+                        } else if (char == Calculator.PAR_OPEN) {
+                            parIsOpen += 1;
+                        }
+                    }
+                }
+                if (typeof this.demoElement !== undefined) {
+                    let currentLetter = this.demoElement.querySelector("[id='" + char + "']");
+                    currentLetter.id += "-checked"
+                    removeStyleClass(currentLetter, "mark");
+                }
+            }
+            while (this.opStack.length != 0) {
+                let res = await this.#operate(this.numStack, this.opStack);
+                await this.numStack.push(res);
+            }
+            let ans = this.numStack.peek;
+            console.log("Final result: " + ans);
+            return ans;
+        }
     }
 
-    let vetor = [];
-    waitTime = 10;
-
-    const calculator = new Calculator();
-    calculator.evaluate("(((5*5)+(5*5))*10)/10");
-
+    //preparações para o calculo
+    async function calculate() {
+        let btn = document.getElementById("calculator").querySelector("#ans");
+        btn.disabled = true;
+        let numStack = new Stack(document.getElementById("calculator-animation").querySelector("#pilha-num"));
+        let opStack = new Stack(document.getElementById("calculator-animation").querySelector("#pilha-op"));
+        //elemento do input da calculadora
+        let inputField = document.getElementById("calculator").querySelector("#input");
+        //elemento onde será colocado o input para demonstração
+        let demoElement = document.getElementById("calculator-animation").querySelector("#demo");
+        //limpar caso tenha clicado dnv no igual
+        clearChilds(demoElement);
+        //colocar a expressão da calculadora para demonstrar
+        for (let i = 0; i < inputField.value.length; i++) {
+            let letter = document.createElement("span");
+            let char = inputField.value.charAt(i);
+            letter.textContent += char;
+            letter.id = char;
+            demoElement.appendChild(letter);
+        }
+        const calculator = new Calculator(demoElement, numStack, opStack);
+        let resultElement = document.createElement("div");
+        let ans = await calculator.evaluate(inputField.value);
+        resultElement.textContent = ans;
+        clearChilds(demoElement);
+        demoElement.appendChild(resultElement);
+        inputField.value = ans;
+        btn.disabled = false;
+    }
+    //adiciona um valor ao input da calculadora
+    function addInput(value) {
+        let inputField = document.getElementById("calculator").querySelector("#input");
+        inputField.value += value;
+    }
+    //remove o input mais recente da calculadora
+    function delInput() {
+        let inputField = document.getElementById("calculator").querySelector("#input");
+        inputField.value = inputField.value.slice(0, -1);
+    }
     //ordenar vetor
     function order() {
         document.getElementById("btn").disabled = true;
         selectionSort();
     }
 
-    //Usa o conceito de "promessa", uma Promise é tipo uma chamada de uma API, você envia uma 
-    //informação e seu código é forçado a esperar até essa informação retornar para continuar.
-    //O setTimeout é uma função que O QUE ESTÁ DENTRO DELA, é executado depois de um tempo.
-    const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-    //A função de sleep só vai funcionar em funções assíncronas(que usam o termo async)
-    //funções async são realizadas em um fluxo diferente do resto do 
-    //código, em outra thread do processador digamos assim.
-    async function funcaoMuitoLouca() {
-        //código...
-        //código...
-        //Aqui, por exemplo, vai parar o código nessa parte e esperar pelo valor
-        //que estão no waitTime, o padrão é 10, então é 10 ms (0.01 s) 
-        await sleep(waitTime);
-        //código...
-        //código...
-    }
-
-    //adicionar classe de estilo a um elemento
+    //adiciona classe de estilo a um elemento
     function addStyleClass(element, nameClass) {
         element.classList.add(nameClass);
     }
-    //remover uma classe de estilo a um elemento
+    //remove uma classe de estilo a um elemento
     function removeStyleClass(element, nameClass) {
-        element.classList.remove(nameClass)
+        element.classList.remove(nameClass);
+    }
+
+    function clearChilds(parent) {
+        while (parent.lastElementChild) {
+            parent.removeChild(parent.lastElementChild);
+        }
     }
 
     //Escreve a velocidade dos passos
-    function rangeSlide(value) {
+    function rangeCalculator(value) {
         //Como no input de range o valor pode ser 0, um operador ternário substitui o 0 por 1 
         let val = (value > 0 ? value : 1);
         //waitTime deve ser em milisegundos
         waitTime = val;
         // val/1000 para mostrar o valor em segundos no html
-        document.getElementById('rangeValue').textContent = "Velocidade dos passos: " + val / 1000 + " s";
+        document.getElementById('label-calculator-speed').textContent = val / 1000 + " s";
     }
 
     //Gera um número aleatório
