@@ -252,15 +252,31 @@
         min-height: 210px;
         height: 210px;
         max-height: 210px;
-        background-color: #eaedef;
+        background-color: black;
         border-radius: 7px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .pilha-content div {
-        padding-top: 4px;
+        padding: auto;
+        border: 1px;
+        height: 42px;
+        border-style: solid;
+        border-color: #000;
+        border-radius: 7px;
+        /*margin-top: 1px;
+        margin-bottom: 1px;*/
+        background-color: #eaedef;
+        /*border-top-width: 1px;
         padding-bottom: 4px;
+        height: 42px;
+        border-top-style: solid;
+        border-top-color: #000;*/
     }
+
+    /*.pilha-content div:nth-child(1) {
+        border: none;
+    }*/
 
     .pilha-wrapper {
         width: 100%;
@@ -601,11 +617,10 @@
             demoElement.appendChild(letter);
         }
         const calculator = new Calculator(demoElement, numStack, opStack);
-        let resultElement = document.createElement("div");
         let ans = await calculator.evaluate(inputField.value);
-        resultElement.textContent = ans;
         clearChilds(demoElement);
-        demoElement.appendChild(resultElement);
+        demoElement.textContent = "" ;
+        demoElement.textContent = ans;
         inputField.value = ans;
         btn.disabled = false;
     }
