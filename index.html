@@ -11,7 +11,6 @@
 <style>
     :root {
         --titleMargin: 5rem;
-        --subTitleMargin: 12rem;
     }
 
     .body {
@@ -42,7 +41,7 @@
     }
 
     .article-paragraph {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         text-align: justify;
         font-family: Arial;
         margin-right: 12rem;
@@ -83,7 +82,7 @@
     #container {
         display: flex;
         height: 550px;
-        margin-left: -60px;
+        margin: var(--titleMargin);
     }
 
     #calculator {
@@ -216,14 +215,8 @@
         background-color: #4D908E;
     }
 
-    
-
     .mark {
         background-color: #43AA8B;
-    }
-
-    .mark-operation {
-        background-color: #f6eb4c;
     }
 
     #calculator-animation {
@@ -319,19 +312,14 @@
                 <header>
                     <h3 class="article-subtitle">Cálculos</h3>
                 </header>
-                <p class="article-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor
-                    incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                    ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia
-                    deserunt mollit anim id est laborum.</p>
+                <p class="article-paragraph">
+                    Os calculos baseados em pilha são divididos em três categorias devido a notação que usam,
+                    essas notações são, em inglês: Postfix(ou Reverse Polish Notation), Prefix(ou Polish Notation) e
+                    Infix. A notação infix é a mais dificil de ser reproduzida, pois é a notação básica de fórmulas
+                    lógicas e aritméticas. Abaixo tem-se uma calculadora que utiliza e demonstra o exemplo de calculos
+                    baseados na notação
+                    infix.
+                </p>
                 <div id="container">
                     <div id="calculator">
                         <div id="slider">
@@ -420,8 +408,7 @@
             this.stack = [];
         }
         get length() {
-            let length = this.stack.length;
-            return length;
+            return this.stack.length;
         }
         async push(value) {
             await sleep(waitTime);
@@ -466,20 +453,21 @@
         }
         //Serve para realizar o calculo de acordo com cada operador
         async #operate(num, op) {
-            addStyleClass(num.stackElement.firstElementChild, "mark-operation");
+            num.stackElement.firstElementChild.setAttribute("style", "background-color:#f6eb4c");
             let a = parseFloat(await num.pop);
-            addStyleClass(num.stackElement.firstElementChild, "mark-operation");
+            op.stackElement.firstElementChild.setAttribute("style", "background-color:#f6eb4c");
+            let operation = await op.pop;
+            num.stackElement.firstElementChild.setAttribute("style", "background-color:#f6eb4c");
             let b = parseFloat(await num.pop);
-            addStyleClass(op.stackElement.firstElementChild, "mark-operation");
             let res;
-            switch (await op.pop) {
+            switch (operation) {
                 case Calculator.ADD:
                     res = a + b;
                     console.log(a + " + " + b + " = " + res);
                     return res;
                 case Calculator.SUB:
-                    res = a - b;
-                    console.log(a + " - " + b + " = " + res);
+                    res = b - a;
+                    console.log(b + " - " + a + " = " + res);
                     return res;
                 case Calculator.MUL:
                     res = a * b;
@@ -492,6 +480,86 @@
                 default:
                     break;
             }
+        }
+        async #reversePolish(newExpr) {
+            let expr = newExpr.split(" ");
+            if (expr === '') {
+                return 0;
+            }
+
+            for (let i = 0; i < expr.length; i++) {
+                if (!isNaN(expr[i]) && isFinite(expr[i])) {
+                    await this.numStack.push(expr[i]);
+
+                } else {
+                    let a = await this.numStack.pop();
+                    let b = await this.numStack.pop();
+                    if (expr[i] === "+") {
+                        await this.numStack.push(parseInt(a) + parseInt(b));
+                    } else if (expr[i] === "-") {
+                        await this.numStack.push(parseInt(b) - parseInt(a));
+                    } else if (expr[i] === "*") {
+                        await this.numStack.push(parseInt(a) * parseInt(b));
+                    } else if (expr[i] === "/") {
+                        await this.numStack.push(parseInt(b) / parseInt(a));
+                    } else if (expr[i] === "^") {
+                        await this.numStack.push(Math.pow(parseInt(b), parseInt(a)));
+                    }
+                }
+            }
+
+            if (this.numStack.length > 1) {
+                return "ERROR";
+            } else {
+                return this.numStack[0];
+            }
+
+        }
+        async #toPostfix(infixExp) {
+            let postfixExp = "";
+            let operators = {
+                "+": 1,
+                "-": 1,
+                "*": 2,
+                "/": 2
+            };
+            async function parse(expression) {
+                if (expression.length === 0) {
+                    if (this.numStack.length > 0) {
+                        while (this.numStack.length > 0) {
+                            postfixExp += await this.numStack.pop;
+                        }
+                    }
+                    return postfixExp;
+                }
+                if (/[0-9]/.test(expression[0])) {
+                    postfixExp += expression[0];
+                }
+                else {
+                    if (expression[0] in operators) {
+                        while (this.numStack.length > 0) {
+                            if (operators[expression[0]] <= operators[this.numStack.peek]) {
+                                postfixExp += await this.numStack.pop;
+                            } else {
+                                break;
+                            }
+                        }
+                        await this.numStack.push(expression[0]);
+                    }
+                    else if (expression[0] === "(") {
+                        await this.numStack.push(expression[0]);
+                    }
+                    else if (expression[0] === ")") {
+                        while (this.numStack.peek !== "(") {
+                            postfixExp += await this.numStack.pop;
+                        }
+                        this.numStack.pop;
+                    }
+                }
+                expression = expression.slice(1);
+                return parse(expression);
+            }
+            return parse(infixExp);
         }
         //serve para saber se a letra é um número
         #isDigit(char) {
@@ -561,7 +629,7 @@
                             if (char == Calculator.PAR_CLOSE) {
                                 parIsOpen -= parIsOpen > 0 ? 1 : 0;
                                 let res = await this.#operate(this.numStack, this.opStack)
-                                this.numStack.push(res);
+                                await this.numStack.push(res);
                             } else {
                                 if (char != Calculator.PAR_OPEN) {
                                     this.opStack.push(char);
@@ -606,8 +674,9 @@
         let inputField = document.getElementById("calculator").querySelector("#input");
         //elemento onde será colocado o input para demonstração
         let demoElement = document.getElementById("calculator-animation").querySelector("#demo");
-        //limpar caso tenha clicado dnv no igual
+        //limpar        
         clearChilds(demoElement);
+        demoElement.textContent = "";
         //colocar a expressão da calculadora para demonstrar
         for (let i = 0; i < inputField.value.length; i++) {
             let letter = document.createElement("span");
@@ -619,11 +688,12 @@
         const calculator = new Calculator(demoElement, numStack, opStack);
         let ans = await calculator.evaluate(inputField.value);
         clearChilds(demoElement);
-        demoElement.textContent = "" ;
+        demoElement.textContent = "";
         demoElement.textContent = ans;
         inputField.value = ans;
         btn.disabled = false;
     }
+
     //adiciona um valor ao input da calculadora
     function addInput(value) {
         let inputField = document.getElementById("calculator").querySelector("#input");
